@@ -1,3 +1,6 @@
+import {getRandomIntegerNumber, getRandomArrayItem} from "../utils.js";
+import {COLORS} from "../const.js";
+
 const MIN_DIFF = 0;
 const MAX_DIFF = 8;
 
@@ -5,14 +8,6 @@ const TasksDescriptions = [
   `Изучить теорию`,
   `Сделать домашку`,
   `Пройти интенсив на соточку`,
-];
-
-const Colors = [
-  `black`,
-  `yellow`,
-  `blue`,
-  `green`,
-  `pink`
 ];
 
 const DefaultRepeatingDays = {
@@ -25,22 +20,14 @@ const DefaultRepeatingDays = {
   "su": false
 };
 
-const getRandomIntegerNumber = (min, max) => {
-  return min + Math.floor(Math.random() * (max - min));
-};
-
-const getRandomArrayItem = (array) => {
-  const randomIndex = getRandomIntegerNumber(0, array.length);
-
-  return array[randomIndex];
-};
-
 const getRandomDate = () => {
   const sign = (Math.random() > 0.5) ? 1 : -1;
   const diffValue = sign * getRandomIntegerNumber(MIN_DIFF, MAX_DIFF);
   const date = new Date();
 
-  return date.setDate(date.getDate() + diffValue);
+  date.setDate(date.getDate() + diffValue);
+
+  return date;
 };
 
 const generateRepeatingDays = () => {
@@ -62,7 +49,7 @@ const generateTask = () => {
     description: getRandomArrayItem(TasksDescriptions),
     dueDate,
     repeatingDays: dueDate ? DefaultRepeatingDays : generateRepeatingDays(),
-    color: getRandomArrayItem(Colors),
+    color: getRandomArrayItem(COLORS),
     isFavorite: Math.random() > 0.5,
     isArchive: Math.random() > 0.5
   };
@@ -77,3 +64,5 @@ const generateTasks = (count) => {
 
   return tasks;
 };
+
+export {generateTasks};

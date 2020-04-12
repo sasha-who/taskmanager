@@ -1,7 +1,7 @@
 import {getRandomIntegerNumber, getRandomArrayItem} from "../utils.js";
 import {COLORS} from "../const.js";
 
-const MIN_DIFF = 0;
+const MIN_DIFF = -8;
 const MAX_DIFF = 8;
 
 const TasksDescriptions = [
@@ -21,11 +21,9 @@ const DefaultRepeatingDays = {
 };
 
 const getRandomDate = () => {
-  const sign = (Math.random() > 0.5) ? 1 : -1;
-  const diffValue = sign * getRandomIntegerNumber(MIN_DIFF, MAX_DIFF);
   const date = new Date();
 
-  date.setDate(date.getDate() + diffValue);
+  date.setDate(date.getDate() + getRandomIntegerNumber(MIN_DIFF, MAX_DIFF));
 
   return date;
 };

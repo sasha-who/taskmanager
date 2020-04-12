@@ -4,7 +4,7 @@ import {formatTime} from "../utils.js";
 export const createTaskTemplate = (tasks) => {
   const {description, dueDate, repeatingDays, color, isFavorite, isArchive} = tasks;
 
-  const isOverdue = dueDate < Date.now();
+  const isOverdue = (dueDate !== null) && (dueDate < Date.now());
   const isDateShow = dueDate ? true : false;
   const isRepeated = Object.values(repeatingDays).some(Boolean);
 

@@ -84,7 +84,7 @@ export const createEditableTaskTemplate = (task) => {
                   date: <span class="card__date-status">${isDateShow ? `yes` : `no`}</span>
                 </button>
 
-                <fieldset class="card__date-deadline">
+                ${isDateShow ? `<fieldset class="card__date-deadline">
                   <label class="card__input-deadline-wrap">
                     <input
                       class="card__date"
@@ -94,17 +94,17 @@ export const createEditableTaskTemplate = (task) => {
                       value="${date} ${time}"
                     />
                   </label>
-                </fieldset>
+                </fieldset>` : ``}
 
                 <button class="card__repeat-toggle" type="button">
                   repeat:<span class="card__repeat-status">${isRepeated ? `yes` : `no`}</span>
                 </button>
 
-                <fieldset class="card__repeat-days">
+                ${isRepeated ? `<fieldset class="card__repeat-days">
                   <div class="card__repeat-days-inner">
                     ${createRepeatingDaysMarkup(DAYS, repeatingDays)}
                   </div>
-                </fieldset>
+                </fieldset>` : ``}
               </div>
             </div>
 

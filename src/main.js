@@ -24,7 +24,7 @@ render(createBoardTemplate(), mainElement, `beforeend`);
 
 const boardTasksElement = mainElement.querySelector(`.board__tasks`);
 
-render(createEditableTaskTemplate(), boardTasksElement, `beforeend`);
+render(createEditableTaskTemplate(tasks[0]), boardTasksElement, `beforeend`);
 
 for (let i = 1; i < TASKS_COUNT; i++) {
   render(createTaskTemplate(tasks[i]), boardTasksElement, `beforeend`);

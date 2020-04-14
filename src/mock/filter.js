@@ -1,57 +1,50 @@
-const generateFilters = (tasks) => {
-  const countAll = tasks.length;
-  let countOverdue = 0;
-  let countToday = 0;
-  let countFavorites = 0;
-  let countRepeating = 0;
-  let countArchive = 0;
+const filterNames = [
+  `all`, `overdue`, `today`, `favorites`, `repeating`, `archive`
+];
+
+const FiltersCount = {};
+
+filterNames.forEach((item) => {
+  FiltersCount[item] = 0;
+});
+
+export const generateFilters = (tasks) => {
+  FiltersCount[`all`] = tasks.length;
 
   for (let task of tasks) {
     const {dueDate, repeatingDays, isFavorite, isArchive} = task;
     const currentDate = new Date(Date.now());
-    const monthCondition = (dueDate !== null) && (dueDate.getMonth() === currentDate.getMonth());
-    const dateCondition = (dueDate !== null) && (dueDate.getDate() === currentDate.getDate());
 
-    if ((dueDate !== null) && (dueDate < currentDate)) {
-      countOverdue++;
+    const isOverdue = (dueDate !== null) && (dueDate < currentDate);
+    const isMonthMatch = (dueDate !== null) && (dueDate.getMonth() === currentDate.getMonth());
+    const isDateMatch = (dueDate !== null) && (dueDate.getDate() === currentDate.getDate());
+    const isRepeating = Object.values(repeatingDays).some(Boolean);
+
+    if (isOverdue) {
+      FiltersCount[`overdue`]++;
     }
 
-    if (monthCondition && dateCondition) {
-      countToday++;
+    if (isMonthMatch && isDateMatch) {
+      FiltersCount[`today`]++;
     }
 
     if (isFavorite) {
-      countFavorites++;
+      FiltersCount[`favorites`]++;
     }
 
-    if (Object.values(repeatingDays).some(Boolean)) {
-      countRepeating++;
+    if (isRepeating) {
+      FiltersCount[`repeating`]++;
     }
 
     if (isArchive) {
-      countArchive++;
+      FiltersCount[`archive`]++;
     }
   }
 
-  return [{
-    name: `all`,
-    count: countAll
-  }, {
-    name: `overdue`,
-    count: countOverdue
-  }, {
-    name: `today`,
-    count: countToday
-  }, {
-    name: `favorites`,
-    count: countFavorites
-  }, {
-    name: `repeating`,
-    count: countRepeating
-  }, {
-    name: `archive`,
-    count: countArchive
-  }];
+  return filterNames.map((item) => {
+    return {
+      name: item,
+      count: FiltersCount[item]
+    };
+  });
 };
-
-export {generateFilters};

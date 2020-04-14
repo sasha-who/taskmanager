@@ -1,8 +1,8 @@
-const ALL_TASKS_COUNT = 20;
-const INITIAL_TASKS_COUNT = 8;
-const ADDITIONAL_TASKS_COUNT = 8;
+export const ALL_TASKS_COUNT = 20;
+export const INITIAL_TASKS_COUNT = 8;
+export const ADDITIONAL_TASKS_COUNT = 8;
 
-const COLORS = [
+export const COLORS = [
   `black`,
   `yellow`,
   `blue`,
@@ -10,7 +10,7 @@ const COLORS = [
   `pink`
 ];
 
-const DAYS = [
+export const DAYS = [
   `mo`,
   `tu`,
   `we`,
@@ -20,7 +20,7 @@ const DAYS = [
   `su`
 ];
 
-const MONTH_NAMES = [
+export const MONTH_NAMES = [
   `January`,
   `February`,
   `March`,
@@ -34,5 +34,3 @@ const MONTH_NAMES = [
   `November`,
   `December`,
 ];
-
-export {ALL_TASKS_COUNT, INITIAL_TASKS_COUNT, ADDITIONAL_TASKS_COUNT, COLORS, DAYS, MONTH_NAMES};

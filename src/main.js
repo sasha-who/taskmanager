@@ -47,7 +47,7 @@ loadMoreButton.addEventListener(`click`, () => {
 
   currentTasksCount = tasksCountByClick;
 
-  if (currentTasksCount > tasks.length) {
+  if (currentTasksCount >= tasks.length) {
     loadMoreButton.remove();
   }
 });

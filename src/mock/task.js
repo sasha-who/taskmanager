@@ -53,7 +53,7 @@ const generateTask = () => {
   };
 };
 
-const generateTasks = (count) => {
+export const generateTasks = (count) => {
   let tasks = [];
 
   for (let i = 0; i < count; i++) {
@@ -62,5 +62,3 @@ const generateTasks = (count) => {
 
   return tasks;
 };
-
-export {generateTasks};

@@ -1,3 +1,7 @@
+const ALL_TASKS_COUNT = 20;
+const INITIAL_TASKS_COUNT = 8;
+const ADDITIONAL_TASKS_COUNT = 8;
+
 const COLORS = [
   `black`,
   `yellow`,
@@ -31,4 +35,4 @@ const MONTH_NAMES = [
   `December`,
 ];
 
-export {COLORS, DAYS, MONTH_NAMES};
+export {ALL_TASKS_COUNT, INITIAL_TASKS_COUNT, ADDITIONAL_TASKS_COUNT, COLORS, DAYS, MONTH_NAMES};

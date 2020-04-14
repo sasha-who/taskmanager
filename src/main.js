@@ -1,4 +1,5 @@
 import {generateTasks} from "./mock/task.js";
+import {generateFilters} from "./mock/filter.js";
 import {createMenuTemplate} from "./components/menu.js";
 import {createFilterTemplate} from "./components/filter.js";
 import {createBoardTemplate} from "./components/board.js";
@@ -10,6 +11,7 @@ const ALL_TASKS_COUNT = 20;
 const TASKS_COUNT = 8;
 
 const tasks = generateTasks(ALL_TASKS_COUNT);
+const filters = generateFilters(tasks);
 
 const render = (template, container, position) => {
   container.insertAdjacentHTML(position, template);
@@ -19,7 +21,7 @@ const mainElement = document.querySelector(`.main`);
 const mainControlElement = mainElement.querySelector(`.main__control`);
 
 render(createMenuTemplate(), mainControlElement, `beforeend`);
-render(createFilterTemplate(), mainElement, `beforeend`);
+render(createFilterTemplate(filters), mainElement, `beforeend`);
 render(createBoardTemplate(), mainElement, `beforeend`);
 
 const boardTasksElement = mainElement.querySelector(`.board__tasks`);

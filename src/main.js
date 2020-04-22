@@ -1,5 +1,5 @@
 import {ALL_TASKS_COUNT, INITIAL_TASKS_COUNT, ADDITIONAL_TASKS_COUNT} from "./const.js";
-import {generateTasks} from "./mock/task.js";
+import {generateAllTasks} from "./mock/task.js";
 import {generateFilters} from "./mock/filter.js";
 import {createMenuTemplate} from "./components/menu.js";
 import {createFilterTemplate} from "./components/filter.js";
@@ -8,7 +8,7 @@ import {createEditableTaskTemplate} from "./components/task-edit.js";
 import {createTaskTemplate} from "./components/task.js";
 import {createLoadMoreButtonTemplate} from "./components/load-more-button.js";
 
-const tasks = generateTasks(ALL_TASKS_COUNT);
+const tasks = generateAllTasks(ALL_TASKS_COUNT);
 const filters = generateFilters(tasks);
 
 const render = (template, container, position) => {

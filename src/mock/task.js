@@ -4,7 +4,7 @@ import {COLORS} from "../const.js";
 const MIN_DIFF = -8;
 const MAX_DIFF = 8;
 
-const TasksDescriptions = [
+const TASKS_DESCRIPTIONS = [
   `Изучить теорию`,
   `Сделать домашку`,
   `Пройти интенсив на соточку`,
@@ -28,23 +28,21 @@ const getRandomDate = () => {
   return date;
 };
 
-const generateRepeatingDays = () => {
-  return {
-    "mo": Math.random() > 0.5,
-    "tu": Math.random() > 0.5,
-    "we": Math.random() > 0.5,
-    "th": Math.random() > 0.5,
-    "fr": Math.random() > 0.5,
-    "sa": Math.random() > 0.5,
-    "su": Math.random() > 0.5
-  };
-};
+const generateRepeatingDays = () => ({
+  "mo": Math.random() > 0.5,
+  "tu": Math.random() > 0.5,
+  "we": Math.random() > 0.5,
+  "th": Math.random() > 0.5,
+  "fr": Math.random() > 0.5,
+  "sa": Math.random() > 0.5,
+  "su": Math.random() > 0.5
+});
 
 const generateTask = () => {
   const dueDate = (Math.random() > 0.5) ? null : getRandomDate();
 
   return {
-    description: getRandomArrayItem(TasksDescriptions),
+    description: getRandomArrayItem(TASKS_DESCRIPTIONS),
     dueDate,
     repeatingDays: dueDate ? DefaultRepeatingDays : generateRepeatingDays(),
     color: getRandomArrayItem(COLORS),
@@ -53,12 +51,8 @@ const generateTask = () => {
   };
 };
 
-export const generateTasks = (count) => {
-  let tasks = [];
-
-  for (let i = 0; i < count; i++) {
-    tasks.push(generateTask());
-  }
-
-  return tasks;
-};
+export const generateAllTasks = (count) => (
+  Array(count)
+  .fill()
+  .map(() => generateTask())
+);

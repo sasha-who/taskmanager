@@ -1,11 +1,16 @@
 import {MONTH_NAMES} from "../const.js";
 import {formatTime} from "../utils.js";
 
-export const createTaskTemplate = (task) => {
-  const {description, dueDate, repeatingDays, color, isFavorite, isArchive} = task;
-
+export const createTaskTemplate = ({
+  description,
+  dueDate,
+  repeatingDays,
+  color,
+  isFavorite,
+  isArchive
+}) => {
   const isOverdue = (dueDate !== null) && (dueDate < Date.now());
-  const isDateShow = dueDate ? true : false;
+  const isDateShow = (dueDate !== null) ? true : false;
   const isRepeated = Object.values(repeatingDays).some(Boolean);
 
   const date = isDateShow ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;

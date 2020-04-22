@@ -1,15 +1,17 @@
+import {CRITICAL_NUMBER} from "./const.js";
+
 const getRandomIntegerNumber = (min, max) => {
   return min + Math.floor(Math.random() * (max - min));
 };
 
-const getRandomArrayItem = (array) => {
-  const randomIndex = getRandomIntegerNumber(0, array.length);
+const getRandomArrayItem = (elements) => {
+  const randomIndex = getRandomIntegerNumber(0, elements.length);
 
-  return array[randomIndex];
+  return elements[randomIndex];
 };
 
 const castomizeTimeFormat = (value) => {
-  return value < 10 ? `0${value}` : String(value);
+  return value < CRITICAL_NUMBER ? `0${value}` : value.toString();
 };
 
 const formatTime = (date) => {

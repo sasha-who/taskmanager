@@ -1,5 +1,10 @@
 import {CRITICAL_NUMBER} from "./const.js";
 
+export const RenderPosition = {
+  BEFOREAND: `beforeand`,
+  AFTERBEGIN: `afterbegin`
+};
+
 export const getRandomIntegerNumber = (min, max) => {
   return min + Math.floor(Math.random() * (max - min));
 };
@@ -27,4 +32,16 @@ export const createElement = (template) => {
   container.innerHTML = template;
 
   return container.firstChild;
+};
+
+export const render = (element, container, position) => {
+  switch (position) {
+    case RenderPosition.BEFOREAND:
+      container.append(element);
+      break;
+
+    case RenderPosition.AFTERBEGIN:
+      container.prepend(element);
+      break;
+  }
 };

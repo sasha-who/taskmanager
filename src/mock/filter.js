@@ -1,50 +1,44 @@
-const filterNames = [
-  `all`, `overdue`, `today`, `favorites`, `repeating`, `archive`
-];
+import {FILTER_NAMES} from "../const.js";
 
-const FiltersCount = {};
+const filtersCount = FILTER_NAMES.reduce((counter, filter) => {
+  counter[filter] = 0;
 
-filterNames.forEach((item) => {
-  FiltersCount[item] = 0;
-});
+  return counter;
+}, {});
 
 export const generateFilters = (tasks) => {
-  FiltersCount[`all`] = tasks.length;
+  filtersCount[`all`] = tasks.length;
 
   for (let task of tasks) {
     const {dueDate, repeatingDays, isFavorite, isArchive} = task;
-    const currentDate = new Date(Date.now());
+    const currentDate = new Date();
 
-    const isOverdue = (dueDate !== null) && (dueDate < currentDate);
     const isMonthMatch = (dueDate !== null) && (dueDate.getMonth() === currentDate.getMonth());
     const isDateMatch = (dueDate !== null) && (dueDate.getDate() === currentDate.getDate());
-    const isRepeating = Object.values(repeatingDays).some(Boolean);
 
-    if (isOverdue) {
-      FiltersCount[`overdue`]++;
-    }
+    filtersCount[`overdue`] = ((dueDate !== null) && (dueDate < currentDate)) ?
+      ++filtersCount[`overdue`] :
+      filtersCount[`overdue`];
 
-    if (isMonthMatch && isDateMatch) {
-      FiltersCount[`today`]++;
-    }
+    filtersCount[`today`] = (isMonthMatch && isDateMatch) ?
+      ++filtersCount[`today`] :
+      filtersCount[`today`];
 
-    if (isFavorite) {
-      FiltersCount[`favorites`]++;
-    }
+    filtersCount[`favorites`] = isFavorite ?
+      ++filtersCount[`favorites`] :
+      filtersCount[`favorites`];
 
-    if (isRepeating) {
-      FiltersCount[`repeating`]++;
-    }
+    filtersCount[`repeating`] = Object.values(repeatingDays).some(Boolean) ?
+      ++filtersCount[`repeating`] :
+      filtersCount[`repeating`];
 
-    if (isArchive) {
-      FiltersCount[`archive`]++;
-    }
+    filtersCount[`archive`] = isArchive ?
+      ++filtersCount[`archive`] :
+      filtersCount[`archive`];
   }
 
-  return filterNames.map((item) => {
-    return {
-      name: item,
-      count: FiltersCount[item]
-    };
-  });
+  return FILTER_NAMES.map((item) => ({
+    name: item,
+    count: filtersCount[item]
+  }));
 };

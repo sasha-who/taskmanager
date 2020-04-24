@@ -1,11 +1,16 @@
 import {MONTH_NAMES} from "../const.js";
-import {formatTime} from "../utils.js";
+import {formatTime, createElement} from "../utils.js";
 
-export const createTaskTemplate = (task) => {
-  const {description, dueDate, repeatingDays, color, isFavorite, isArchive} = task;
-
+const createTaskTemplate = ({
+  description,
+  dueDate,
+  repeatingDays,
+  color,
+  isFavorite,
+  isArchive
+}) => {
   const isOverdue = (dueDate !== null) && (dueDate < Date.now());
-  const isDateShow = dueDate ? true : false;
+  const isDateShow = (dueDate !== null) ? true : false;
   const isRepeated = Object.values(repeatingDays).some(Boolean);
 
   const date = isDateShow ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
@@ -60,3 +65,26 @@ export const createTaskTemplate = (task) => {
     </article>`
   );
 };
+
+export default class Task {
+  constructor(task) {
+    this._task = task;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return (createTaskTemplate(this._task));
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

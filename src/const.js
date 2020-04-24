@@ -1,6 +1,7 @@
 export const ALL_TASKS_COUNT = 20;
 export const INITIAL_TASKS_COUNT = 8;
 export const ADDITIONAL_TASKS_COUNT = 8;
+export const CRITICAL_NUMBER = 10;
 
 export const COLORS = [
   `black`,
@@ -32,5 +33,14 @@ export const MONTH_NAMES = [
   `September`,
   `October`,
   `November`,
-  `December`,
+  `December`
+];
+
+export const FILTER_NAMES = [
+  `all`,
+  `overdue`,
+  `today`,
+  `favorites`,
+  `repeating`,
+  `archive`
 ];

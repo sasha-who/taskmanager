@@ -8,6 +8,7 @@ import BoardComponent from "./components/board.js";
 import TaskEditComponent from "./components/task-edit.js";
 import TaskComponent from "./components/task.js";
 import LoadMoreButtonComponent from "./components/load-more-button.js";
+import BoardNoTasksComponent from "./components/board-no-tasks.js";
 
 const renderTask = (task, container) => {
   const replaceTaskToEdit = () => {

@@ -51,15 +51,37 @@ const renderBoard = (tasks, container) => {
   const boardComponent = new BoardComponent();
   render(boardComponent.getElement(), container, RenderPosition.BEFOREAND);
 
+  const isAllTasksArchive = tasks.every((item) => item.isArchive);
+
+  if (tasks.length === 0 || isAllTasksArchive) {
+    const boardNoTasksComponent = new BoardNoTasksComponent();
+
+    render(
+        boardNoTasksComponent.getElement(),
+        boardComponent.getElement(),
+        RenderPosition.BEFOREAND
+    );
+
+    return;
+  }
+
   const boardTasksComponent = new BoardTasksComponent();
-  render(boardTasksComponent.getElement(), boardComponent.getElement(), RenderPosition.BEFOREAND);
+  render(
+      boardTasksComponent.getElement(),
+      boardComponent.getElement(),
+      RenderPosition.BEFOREAND
+  );
 
   for (let i = 0; i < INITIAL_TASKS_COUNT; i++) {
     renderTask(tasks[i], boardTasksComponent.getElement());
   }
 
   const loadMoreButtonComponent = new LoadMoreButtonComponent();
-  render(loadMoreButtonComponent.getElement(), boardComponent.getElement(), RenderPosition.BEFOREAND);
+  render(
+      loadMoreButtonComponent.getElement(),
+      boardComponent.getElement(),
+      RenderPosition.BEFOREAND
+  );
 
   const loadMoreButton = boardComponent.getElement().querySelector(`.load-more`);
 

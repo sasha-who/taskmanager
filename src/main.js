@@ -10,13 +10,19 @@ import TaskComponent from "./components/task.js";
 import LoadMoreButtonComponent from "./components/load-more-button.js";
 
 const renderTask = (task, container) => {
-  const editButtonClickHandler = () => {
+  const replaceTaskToEdit = () => {
     container.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
   };
 
-  const formSubmitHandler = (evt) => {
-    evt.preventDefault();
+  const replaceEditToTask = () => {
     container.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+  };
+
+  const escKeydownHandler = (evt) => {
+    if (evt.key === `Escape`) {
+      replaceEditToTask();
+      document.removeEventListener(`keydown`, escKeydownHandler);
+    }
   };
 
   const taskComponent = new TaskComponent(task);
@@ -25,8 +31,17 @@ const renderTask = (task, container) => {
   const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
   const formElement = taskEditComponent.getElement().querySelector(`.card__form`);
 
-  editButton.addEventListener(`click`, editButtonClickHandler);
-  formElement.addEventListener(`submit`, formSubmitHandler);
+  editButton.addEventListener(`click`, () => {
+    replaceTaskToEdit();
+    document.addEventListener(`keydown`, escKeydownHandler);
+  });
+
+  formElement.addEventListener(`submit`, (evt) => {
+    evt.preventDefault();
+    replaceEditToTask();
+    document.removeEventListener(`keydown`, escKeydownHandler);
+  });
+
   render(taskComponent.getElement(), container, RenderPosition.BEFOREAND);
 };
 

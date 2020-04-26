@@ -44,3 +44,7 @@ export const FILTER_NAMES = [
   `repeating`,
   `archive`
 ];
+
+export const Keys = {
+  ESCAPE: `Escape`
+};

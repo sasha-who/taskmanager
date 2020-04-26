@@ -1,4 +1,4 @@
-import {ALL_TASKS_COUNT, INITIAL_TASKS_COUNT, ADDITIONAL_TASKS_COUNT} from "./const.js";
+import {ALL_TASKS_COUNT, INITIAL_TASKS_COUNT, ADDITIONAL_TASKS_COUNT, Keys} from "./const.js";
 import {RenderPosition, render} from "./utils.js";
 import {generateAllTasks} from "./mock/task.js";
 import {generateFilters} from "./mock/filter.js";
@@ -9,7 +9,7 @@ import BoardTasksComponent from "./components/board-tasks.js";
 import TaskEditComponent from "./components/task-edit.js";
 import TaskComponent from "./components/task.js";
 import LoadMoreButtonComponent from "./components/load-more-button.js";
-import BoardNoTasksComponent from "./components/board-no-tasks.js";
+import EmptyBoardComponent from "./components/board-no-tasks.js";
 
 const renderTask = (task, container) => {
   const replaceTaskToEdit = () => {
@@ -21,7 +21,7 @@ const renderTask = (task, container) => {
   };
 
   const escKeydownHandler = (evt) => {
-    if (evt.key === `Escape`) {
+    if (evt.key === Keys.ESCAPE) {
       replaceEditToTask();
       document.removeEventListener(`keydown`, escKeydownHandler);
     }
@@ -54,10 +54,10 @@ const renderBoard = (tasks, container) => {
   const isAllTasksArchive = tasks.every((item) => item.isArchive);
 
   if (tasks.length === 0 || isAllTasksArchive) {
-    const boardNoTasksComponent = new BoardNoTasksComponent();
+    const emptyBoardComponent = new EmptyBoardComponent();
 
     render(
-        boardNoTasksComponent.getElement(),
+        emptyBoardComponent.getElement(),
         boardComponent.getElement(),
         RenderPosition.BEFOREAND
     );

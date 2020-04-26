@@ -6,7 +6,7 @@ const createBoardNoTasksTemplate = () => (
   </p>`
 );
 
-export default class BoardNoTasks {
+export default class EmptyBoard {
   constructor() {
     this._element = null;
   }
